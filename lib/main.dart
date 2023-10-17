@@ -5,6 +5,7 @@ import 'package:weatherapp/screens/home_screen.dart';
 import 'package:geolocator/geolocator.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

@@ -8,8 +8,41 @@ import 'package:intl/intl.dart';
 import 'package:weatherapp/bloc/weather_bloc_bloc.dart';
 import 'package:weatherapp/utils/extensions.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Widget weatherIcon(int code) {
+    switch (code) {
+      case >= 200 && <= 232:
+        return Image.asset('assets/thunderstorm.png');
+      case >= 300 && <= 321:
+        return Image.asset('assets/drizzle.png');
+      case >= 500 && <= 531:
+        return Image.asset('assets/rain.png');
+      case >= 600 && <= 622:
+        return Image.asset('assets/snow.png');
+      case >= 701 && <= 762:
+        return Image.asset('assets/fog.png');
+      case 771:
+      case 781:
+        return Image.asset('assets/wind.png');
+      case 800:
+        return Image.asset('assets/clear.png');
+      case 801:
+      case 802:
+        return Image.asset('assets/partly_cloudy.png');
+      case 803:
+      case 804:
+        return Image.asset('assets/cloud.png');
+      default:
+        return Image.asset('assets/clear.png');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +133,7 @@ class HomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Image.asset(
-                                'assets/partly_cloudy.png',
-                              ),
+                              weatherIcon(state.weather.weatherConditionCode!),
                               Center(
                                 child: Text(
                                   '${state.weather.temperature!.celsius!.round()}°C',
@@ -292,8 +323,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         )
-                      : // ! Change this.
-                      const Center(
+                      : const Center(
                           child: CircularProgressIndicator(),
                         );
                 },
