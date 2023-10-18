@@ -16,6 +16,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String greetingMessage(int time) {
+    switch (time) {
+      case >= 5 && <= 9:
+        return 'Good Morning';
+      case >= 10 && <= 13:
+        return 'Good Day';
+      case >= 14 && <= 17:
+        return 'Good Afternoon';
+      case >= 18 && <= 23:
+      case >= 0 && <= 4:
+        return 'Good Night';
+      default:
+        return '';
+    }
+  }
+
   Widget weatherIcon(int code) {
     switch (code) {
       case >= 200 && <= 232:
@@ -125,9 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               const Gap(8),
-                              const Text(
-                                'Good Morning',
-                                style: TextStyle(
+                              Text(
+                                greetingMessage(
+                                  int.parse(
+                                    DateFormat.H().format(state.weather.date!),
+                                  ),
+                                ),
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
