@@ -1,12 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:weatherapp/bloc/weather_bloc_bloc.dart';
-import 'package:weatherapp/utils/extensions.dart';
+import 'package:weatherapp/utils/utils.dart';
+import 'package:weatherapp/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -80,49 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: deviceSize.height,
           child: Stack(
             children: [
-              Align(
-                alignment: const AlignmentDirectional(3, -0.3),
-                child: Container(
-                  height: 300,
-                  width: 300,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFF673AB7),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(-3, -0.3),
-                child: Container(
-                  height: 300,
-                  width: 300,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFF673AB7),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0, -1.2),
-                child: Container(
-                  height: 300,
-                  width: 300,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFFFAB40),
-                  ),
-                ),
-              ),
-              BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 85.0,
-                  sigmaY: 85.0,
-                ),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                ),
-              ),
+              const HomeScreenBackground(),
               BlocBuilder<WeatherBlocBloc, WeatherBlocState>(
                 builder: (context, state) {
                   return state is WeatherBlocSuccess
